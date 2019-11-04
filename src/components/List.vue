@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="">
-    <li v-on:click="handleClick">{{event.title}}</li>
+    <li v-on:click="handleClick">{{indEvent.title}}</li>
   </div>
 </template>
 
@@ -10,7 +10,7 @@ import {eventBus} from '../main.js'
 
 export default {
   name: 'list-item',
-  props: ['event'],
+  props: ['indEvent'],
   methods: {
     handleClick(){
       eventBus.$emit('event-selected', this.event)

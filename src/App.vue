@@ -35,7 +35,10 @@ export default {
 
     fetch('https://eonet.sci.gsfc.nasa.gov/api/v2.1/events')
     .then(response => response.json())
-    .then(res => this.eventsData = this.transformEvents(res.events))
+    .then(res => {
+      this.eventsData = this.transformEvents(res.events)
+      this.setMarkersForEvents();
+    })
     // .then(res => this.eventData = this.transformEvents(res.events.description))
 
   },
@@ -44,7 +47,15 @@ export default {
       return arr.map((event) => {
         return (event)
       })
+    },
+
+    setMarkersForEvents(){
+      this.eventsData.forEach((event)=>{
+        // console.log(event);
+        // Call a createMarker method, pass in event, get the coordinates from event
+      })
     }
+
   },
   filters: {
 
