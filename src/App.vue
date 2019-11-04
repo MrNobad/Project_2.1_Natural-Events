@@ -5,7 +5,7 @@
     <h2>Event</h2>
 
     <map-view :mapid="mapid"></map-view>
-<event-list :eventsData="eventsData"></event-list>
+    <event-list :eventsData="eventsData"></event-list>
   </div>
 </template>
 
@@ -22,13 +22,15 @@ export default {
   data() {
     return {
       eventsData: [],
-      mapid: []
+      mapid: [],
+      eventLatLng: []
 
     }
   },
   components: {
     "map-view": Map,
     "event-list": EventList
+  
   },
 
   mounted(){
@@ -51,10 +53,23 @@ export default {
 
     setMarkersForEvents(){
       this.eventsData.forEach((event)=>{
-        // console.log(event);
-        // Call a createMarker method, pass in event, get the coordinates from event
+        this.createMarker(event)
       })
-    }
+    },
+
+    createMarker(event){
+      // TODO: in case of multiple geometries, get an average, to find centre
+      const firstGeometry = event.geometries[0]
+      this.eventLatLng.push(firstGeometry.coordinates)
+      // Create a marker, and pass in the geometry.coordinates
+      // console.log(firstGeometry.coordinates);
+    },
+
+
+
+
+
+
 
   },
   filters: {

@@ -1,6 +1,8 @@
 <template lang="html">
   <div id="mapid">
-    <l-map ref="myMap"></l-map>
+    <l-map ref="myMap">
+      <l-marker :lat-lng="eventLatLng" ></l-marker>
+    </l-map>
   </div>
 </template>
 
@@ -10,7 +12,9 @@ import {LMap, LTileLayer, LMarker} from 'vue2-leaflet'
 
 export default {
   name: 'map-id',
-  props: ['mapid'],
+  props: ['mapid', "eventLatLng"],
+
+
 
   components: {
     "l-map": LMap,
