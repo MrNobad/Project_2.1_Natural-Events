@@ -6,6 +6,7 @@
 
     <map-view :eventsData="eventsData" :mapid="mapid"></map-view>
     <event-list :eventsData="eventsData"></event-list>
+    <h3>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"     title="Flaticon">www.flaticon.com</a></h3>
   </div>
 </template>
 
