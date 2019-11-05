@@ -18,6 +18,7 @@ import EventList from './components/EventList.vue'
 
 export default {
   name: 'app',
+  props: ['indEvent'],
 
   data() {
     return {
@@ -36,50 +37,11 @@ export default {
     .then(response => response.json())
     .then(res => {
       this.eventsData = res.events
-      // eventBus.$emit('event-coordinates-loaded')
+    eventBus.$on('event-selected', this.indEvent)
     })
-
-    // fetch('https://eonet.sci.gsfc.nasa.gov/api/v2.1/events')
-    // .then(response => response.json())
-    // .then(res => {
-    //   this.eventsData = this.transformEvents(res.events)
-    //   this.setMarkersForEvents();
-    //   eventBus.$emit('event-coordinates-loaded')
-    // })
-    // .then(res => this.eventData = this.transformEvents(res.events.description))
-
-    // },
-    // methods: {
-    //   transformEvents(arr){
-    //     return arr.map((event) => {
-    //       return (event)
-    //     })
-    //   },
-
-    // setMarkersForEvents(){
-    //   this.eventsData.forEach((event)=>{
-    //     this.createMarker(event)
-    // trigger event bus for setup-markers?
-    //   })
-    // },
-
-    // createMarker(event){
-    // TODO: in case of multiple geometries, get an average, to find centre
-    // const firstGeometry = event.geometries[0]
-    // L.marker([firstGeometry[], firstGeometry[0]]).addTo(this.myMap);
-
-    // this.eventLatLng.push(firstGeometry.coordinates)
-    // Create a marker, and pass in the geometry.coordinates
-    // console.log(firstGeometry.coordinates);
-    // },
-
-
-
-
-
-
-
   },
+
+  
   filters: {
 
   }
