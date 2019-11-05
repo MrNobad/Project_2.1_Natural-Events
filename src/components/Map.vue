@@ -9,9 +9,10 @@
       :latLng="{
         lat: event.geometries[0].coordinates[1],
         lng: event.geometries[0].coordinates[0]
-      }">
-      <l-popup :content="event.title"> </l-popup>
-    </l-marker>
+        }"
+        v-on:click="handleClick(event)">
+        <l-popup :content="event.title"> </l-popup>
+      </l-marker>
     </l-map>
   </div>
 </template>
@@ -47,11 +48,11 @@ export default {
 
   },
 
-methods: {
-  // openPopup: (index) => {
-  //   console.log(index);
-  // }
-}
+  methods: {
+    handleClick(event){
+      eventBus.$emit('event-selected', event)
+    }
+  }
 }
 </script>
 
