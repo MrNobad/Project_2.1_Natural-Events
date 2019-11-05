@@ -5,6 +5,12 @@
     <h2>Event</h2>
     <ind-event-detail :indEvent="selectedEvent"></ind-event-detail>
     <map-view :eventsData="eventsData" :mapid="mapid"></map-view>
+    <button type="button" name="Severe Storms" @click="filteredEvents()">Severe Storms</button>
+    <!-- <filtered-events>
+      <select id="event-select" v-model="eventsData">
+        <option v-for="(event, title) in eventsData" :value="event">{{title}}</option>
+      </select>
+    </filtered-events> -->
     <event-list :eventsData="eventsData"></event-list>
     <h3>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"     title="Flaticon">www.flaticon.com</a></h3>
   </div>
@@ -25,23 +31,25 @@ export default {
     return {
       mapid: [],
       eventsData: [],
-      selectedEvent: null
+      selectedEvent: null,
+      // filteredEvents: null
     }
   },
   components: {
     "map-view": Map,
     "event-list": EventList,
     "ind-event-detail": EventDetail,
-    "filtered-events": FilteredEvents
+    // "filtered-events": FilteredEvents
 
   },
 
-  computed: {
+  methods: {
     filteredEvents: function(){
-      return this.eventsData.filter(event) => {
+      this.eventsData = this.eventsData.filter((event) => {
         return event.categories[0].title === "Severe Storms";
-      }
+      })
     }
+
   },
 
 
