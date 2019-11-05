@@ -4,17 +4,14 @@
     <h2>The Earth Observatory Natural Event Tracker (EONET)</h2>
     <h2>Event</h2>
     <ind-event-detail :indEvent="selectedEvent"></ind-event-detail>
-    <map-view :eventsData="eventsData" :mapid="mapid"></map-view>
-    <button type="button" name="Severe Storms" value="Severe Storms" @click="filteredEvents('Severe Storms')">Severe Storms</button>
+    <map-view :eventsData="eventsDataFiltered" :mapid="mapid"></map-view>
+    <button type="button" name="Severe Storms" @click="filteredEvents('Severe Storms')">Severe Storms</button>
     <button type="button" name="Icebergs" @click="filteredEvents('Sea and Lake Ice')">Icebergs</button>
     <button type="button" name="Volcanoes" @click="filteredEvents('Volcanoes')">Volcanoes</button>
     <button type="button" name="Wildfires" @click="filteredEvents('Wildfires')">Wildfires</button>
-    <!-- <filtered-events>
-      <select id="event-select" v-model="eventsData">
-        <option v-for="(event, title) in eventsData" :value="event">{{title}}</option>
-      </select>
-    </filtered-events> -->
-    <event-list :eventsData="eventsData"></event-list>
+    <button type="button" name="View All" @click="filteredEvents('')">Reset Filters</button>
+
+    <event-list :eventsData="eventsDataFiltered"></event-list>
     <h3>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"     title="Flaticon">www.flaticon.com</a></h3>
   </div>
 </template>
@@ -35,7 +32,7 @@ export default {
       mapid: [],
       eventsData: [],
       selectedEvent: null,
-      // filteredEvents: null
+      eventsDataFiltered: []
     }
   },
   components: {
@@ -48,9 +45,12 @@ export default {
 
   methods: {
     filteredEvents: function(value){
-      this.eventsData = this.eventsData.filter((event) => {
+      if (!value) {
+        this.eventsDataFiltered = this.eventsData
+      }else{
+      this.eventsDataFiltered = this.eventsData.filter((event) => {
         return event.categories[0].title === value;
-      })
+      })}
     }
 
   },
@@ -60,7 +60,8 @@ export default {
     fetch('https://eonet.sci.gsfc.nasa.gov/api/v2.1/events')
     .then(response => response.json())
     .then(res => {
-      this.eventsData = res.events})
+      this.eventsData = res.events
+      this.eventsDataFiltered = res.events})
     eventBus.$on('event-selected', (event) => this.selectedEvent = event)
 
   },
