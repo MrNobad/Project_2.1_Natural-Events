@@ -8,7 +8,7 @@
     <button type="button" name="Severe Storms" value="Severe Storms" @click="filteredEvents('Severe Storms')">Severe Storms</button>
     <button type="button" name="Icebergs" @click="filteredEvents('Sea and Lake Ice')">Icebergs</button>
     <button type="button" name="Volcanoes" @click="filteredEvents('Volcanoes')">Volcanoes</button>
-    <button type="button" name="Wildfires" @click="filteredEvents()">Wildfires</button>
+    <button type="button" name="Wildfires" @click="filteredEvents('Wildfires')">Wildfires</button>
     <!-- <filtered-events>
       <select id="event-select" v-model="eventsData">
         <option v-for="(event, title) in eventsData" :value="event">{{title}}</option>
