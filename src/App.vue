@@ -31,9 +31,19 @@ export default {
   components: {
     "map-view": Map,
     "event-list": EventList,
-    "ind-event-detail": EventDetail
+    "ind-event-detail": EventDetail,
+    "filtered-events": FilteredEvents
 
   },
+
+  computed: {
+    filteredEvents: function(){
+      return this.eventsData.filter(event) => {
+        return event.categories[0].title === "Severe Storms";
+      }
+    }
+  },
+
 
   mounted(){
     fetch('https://eonet.sci.gsfc.nasa.gov/api/v2.1/events')
