@@ -5,7 +5,8 @@
     <h2>Event</h2>
     <ind-event-detail :indEvent="selectedEvent"></ind-event-detail>
     <map-view :eventsData="eventsDataFiltered" :mapid="mapid"></map-view>
-    <button type="button" name="Severe Storms" @click="filteredEvents('Severe Storms')">Severe Storms</button>
+    <event-type-description :eventTypeDescription="eventTypeDescription"></event-type-description>
+        <button type="button" name="Severe Storms" @click="filteredEvents('Severe Storms')">Severe Storms</button>
     <button type="button" name="Icebergs" @click="filteredEvents('Sea and Lake Ice')">Icebergs</button>
     <button type="button" name="Volcanoes" @click="filteredEvents('Volcanoes')">Volcanoes</button>
     <button type="button" name="Wildfires" @click="filteredEvents('Wildfires')">Wildfires</button>
@@ -20,7 +21,8 @@
 import {eventBus} from './main.js'
 import EventDetail from './components/EventDetail.vue';
 import Map from './components/Map.vue';
-import EventList from './components/EventList.vue'
+import EventList from './components/EventList.vue';
+import EventTypeDescription from './components/EventTypeDescription'
 
 
 export default {
@@ -32,13 +34,15 @@ export default {
       mapid: [],
       eventsData: [],
       selectedEvent: null,
-      eventsDataFiltered: []
+      eventsDataFiltered: [],
+      eventTypeDescription: ""
     }
   },
   components: {
     "map-view": Map,
     "event-list": EventList,
     "ind-event-detail": EventDetail,
+    "event-type-description": eventTypeDescription
     // "filtered-events": FilteredEvents
 
   },
@@ -51,8 +55,9 @@ export default {
       this.eventsDataFiltered = this.eventsData.filter((event) => {
         return event.categories[0].title === value;
       })}
-    }
 
+
+    }
   },
 
 
