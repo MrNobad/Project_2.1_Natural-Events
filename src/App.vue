@@ -3,7 +3,7 @@
     <h1>Natural Events</h1>
     <h2>The Earth Observatory Natural Event Tracker (EONET)</h2>
     <h2>Event</h2>
-
+    <ind-event-detail :indEvent="selectedEvent"></ind-event-detail>
     <map-view :eventsData="eventsData" :mapid="mapid"></map-view>
     <event-list :eventsData="eventsData"></event-list>
   </div>
@@ -11,24 +11,26 @@
 
 <script>
 import {eventBus} from './main.js'
-import NaturalEvent from './components/NaturalEvent.vue';
+import EventDetail from './components/EventDetail.vue';
 import Map from './components/Map.vue';
 import EventList from './components/EventList.vue'
 
 
 export default {
   name: 'app',
-  props: ['indEvent'],
+  // props: ['indEvent'],
 
   data() {
     return {
       mapid: [],
-      eventsData: []
+      eventsData: [],
+      selectedEvent: null
     }
   },
   components: {
     "map-view": Map,
-    "event-list": EventList
+    "event-list": EventList,
+    "ind-event-detail": EventDetail
 
   },
 
@@ -36,12 +38,12 @@ export default {
     fetch('https://eonet.sci.gsfc.nasa.gov/api/v2.1/events')
     .then(response => response.json())
     .then(res => {
-      this.eventsData = res.events
-    eventBus.$on('event-selected', this.indEvent)
-    })
+      this.eventsData = res.events})
+    eventBus.$on('event-selected', (event) => this.selectedEvent = event)
+
   },
 
-  
+
   filters: {
 
   }

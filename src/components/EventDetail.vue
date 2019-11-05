@@ -1,6 +1,6 @@
 <template lang="html">
   <div v-if="indEvent" id="indEventDetail">
-    <h2>{{indEvent.title}}</h2>
+    <h2>Event Title: {{indEvent.title}}</h2>
   </div>
 </template>
 
