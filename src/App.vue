@@ -5,7 +5,10 @@
     <h2>Event</h2>
     <ind-event-detail :indEvent="selectedEvent"></ind-event-detail>
     <map-view :eventsData="eventsData" :mapid="mapid"></map-view>
-    <button type="button" name="Severe Storms" @click="filteredEvents()">Severe Storms</button>
+    <button type="button" name="Severe Storms" value="Severe Storms" @click="filteredEvents('Severe Storms')">Severe Storms</button>
+    <button type="button" name="Icebergs" @click="filteredEvents('Sea and Lake Ice')">Icebergs</button>
+    <button type="button" name="Volcanoes" @click="filteredEvents()">Volcanoes</button>
+    <button type="button" name="Wildfires" @click="filteredEvents()">Wildfires</button>
     <!-- <filtered-events>
       <select id="event-select" v-model="eventsData">
         <option v-for="(event, title) in eventsData" :value="event">{{title}}</option>
@@ -44,9 +47,9 @@ export default {
   },
 
   methods: {
-    filteredEvents: function(){
+    filteredEvents: function(value){
       this.eventsData = this.eventsData.filter((event) => {
-        return event.categories[0].title === "Severe Storms";
+        return event.categories[0].title === value;
       })
     }
 
