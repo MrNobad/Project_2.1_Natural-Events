@@ -45,7 +45,7 @@ export default {
   },
 
   mounted() {
-
+//add $on here, listen to event-selected. changing zoom level here.
   },
 
   methods: {
