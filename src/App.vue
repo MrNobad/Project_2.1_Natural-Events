@@ -5,9 +5,9 @@
     <h2>Event</h2>
     <ind-event-detail :indEvent="selectedEvent"></ind-event-detail>
     <map-view :eventsData="eventsDataFiltered" :mapid="mapid"></map-view>
-    <event-type-description :eventTypeDescription="eventTypeDescription"></event-type-description>
     <button type="button" v-for="(eventType, index) in eventTypes" name="eventType" @click="selectedEventType(eventType)">{{eventType}}</button>
     <button type="button" name="View All" @click="filteredEvents('')">Reset Filters</button>
+    <event-type-description :eventTypeDescription="eventTypeDescription"></event-type-description>
     <event-list :eventsData="eventsDataFiltered"></event-list>
     <!-- <h3>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"     title="Flaticon">www.flaticon.com</a></h3> -->
   </div>
