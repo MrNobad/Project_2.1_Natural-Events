@@ -1,8 +1,8 @@
 <template lang="html">
   <div v-if="selectedEventTypeDescription">
     <img :src="selectedEventTypeDescription.url" alt="">
-    <h2>{{selectedEventTypeDescription.title}}</h2>
-    <p>{{selectedEventTypeDescription.info}}</p>
+    <h1>{{selectedEventTypeDescription.title}}</h1>
+    <h2>{{selectedEventTypeDescription.info}}</h2>
   </div>
 </template>
 
@@ -61,7 +61,7 @@ flex-wrap: wrap;
 }
 
 img {
-  height: 100px;
+  height: 150px;
   padding: 15px;
 }
 </style>
