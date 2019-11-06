@@ -1,6 +1,6 @@
 <template lang="html">
   <div id="mapid">
-    <l-map style="height: 80%; width: 100%" :zoom="zoom" :center="center" ref="map">
+    <l-map style="height: 130%; width: 100%" :zoom="zoom" :center="center" ref="map">
       <l-tile-layer :url="url">
       </l-tile-layer>
       <l-marker
@@ -59,7 +59,7 @@ export default {
       if (!coordinates) {
         this.center = "center"
       }else{
-        this.$refs.map.mapObject.flyTo([coordinates[1], coordinates[0]], 5);
+        this.$refs.map.mapObject.flyTo([coordinates[1], coordinates[0]], 9);
 
       }
     }

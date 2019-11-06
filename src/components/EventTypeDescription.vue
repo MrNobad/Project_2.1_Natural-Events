@@ -1,8 +1,8 @@
 <template lang="html">
   <div v-if="selectedEventTypeDescription">
-    <h3>{{selectedEventTypeDescription.title}}</h3>
-    <p>{{selectedEventTypeDescription.info}}</p>
     <img :src="selectedEventTypeDescription.url" alt="">
+    <h2>{{selectedEventTypeDescription.title}}</h2>
+    <p>{{selectedEventTypeDescription.info}}</p>
   </div>
 </template>
 
@@ -55,4 +55,13 @@ mounted(){
 </script>
 
 <style lang="css" scoped>
+ h3, p, img {
+display: flex-box;
+flex-wrap: wrap;
+}
+
+img {
+  height: 100px;
+  padding: 15px;
+}
 </style>

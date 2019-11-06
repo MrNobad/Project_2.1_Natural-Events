@@ -1,15 +1,35 @@
 <template>
   <div id="app">
-    <h1>Natural Events</h1>
-    <h2>The Earth Observatory Natural Event Tracker (EONET)</h2>
-    <h2>Event</h2>
+    <div class="header">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/200px-NASA_logo.svg.png" alt="">
+      <p><strong>Natural Events</strong></p>
+
+      <h2>The Earth Observatory Natural Event Tracker (EONET)</h2>
+      <h3>Powered by NASA and Ross, Laurie & Stevie</h3>
+    </div>
+    <br>
+    <div class="event-detail">
     <ind-event-detail :indEvent="selectedEvent"></ind-event-detail>
-    <map-view :eventsData="eventsDataFiltered" :mapid="mapid"></map-view>
-    <button type="button" v-for="(eventType, index) in eventTypes" name="eventType" @click="selectedEventType(eventType)">{{eventType}}</button>
-    <button type="button" name="View All" @click="filteredEvents('')">Reset Filters</button>
-    <event-type-description :eventTypeDescription="eventTypeDescription"></event-type-description>
-    <event-list :eventsData="eventsDataFiltered"></event-list>
-    <!-- <h3>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"     title="Flaticon">www.flaticon.com</a></h3> -->
+  </div>
+    <div class="header">
+
+      <map-view class="map-centre" :eventsData="eventsDataFiltered" :mapid="mapid"></map-view>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <button id="button" type="button" v-for="(eventType, index) in eventTypes" name="eventType" @click="selectedEventType(eventType)"><strong>{{eventType}}</strong></button>
+      <button id="button" type="button" name="View All" @click="selectedEventType('')"><strong>Reset Filters</strong></button>
+      <event-type-description :eventTypeDescription="eventTypeDescription"></event-type-description>
+    </div>
+    <br>
+    <event-list class="body" :eventsData="eventsDataFiltered"></event-list>
+
+    <p>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"     title="Flaticon">www.flaticon.com</a></p>
   </div>
 </template>
 
@@ -49,37 +69,62 @@ export default {
       if (!eventType) {
         this.eventsDataFiltered = this.eventsData
       }else{
-      this.eventsDataFiltered = this.eventsData.filter((event) => {
-        return event.categories[0].title === eventType;
-      })}
-      eventBus.$emit("event-type-selected", eventType)
+        this.eventsDataFiltered = this.eventsData.filter((event) => {
+          return event.categories[0].title === eventType;
+        })}
+        eventBus.$emit("event-type-selected", eventType)
+      }
+    },
+
+
+    mounted(){
+      fetch('https://eonet.sci.gsfc.nasa.gov/api/v2.1/events')
+      .then(response => response.json())
+      .then(res => {
+        this.eventsData = res.events
+        this.eventsDataFiltered = res.events})
+        eventBus.$on('event-selected', (event) => this.selectedEvent = event)
+        eventBus.$on('event-type-description', (event) => this.eventTypeDescription = event)
+
+      },
+
+
+      filters: {
+
+      }
     }
-  },
+    </script>
+
+    <style>
+      #app {
+        font-family: 'Avenir', Helvetica, Arial, sans-serif;
+        text-align: left;
+        color: #000000;
+        margin-top: 10px;
 
 
-  mounted(){
-    fetch('https://eonet.sci.gsfc.nasa.gov/api/v2.1/events')
-    .then(response => response.json())
-    .then(res => {
-      this.eventsData = res.events
-      this.eventsDataFiltered = res.events})
-    eventBus.$on('event-selected', (event) => this.selectedEvent = event)
-    eventBus.$on('event-type-description', (event) => this.eventTypeDescription = event)
+      }
 
-  },
+      .header {
+        text-align: center;
+                padding: 20px;
+      }
 
+      #button {
+        height: 50px;
+        width: auto;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin: 5px;
+        border-color: salmon;
+        background-color: dodgerblue;
+        text-color: salmon;
+        text-style: bold;
+      }
 
-  filters: {
+      p {
+font-size: 100px;
 
-  }
-}
-</script>
+      }
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  text-align: left;
-  color: #000000;
-  margin-top: 60px;
-}
-</style>
+    </style>

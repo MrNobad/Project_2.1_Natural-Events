@@ -1,8 +1,8 @@
 <template lang="html">
   <div v-if="indEvent" id="indEventDetail">
-    <h2>Natural Event: {{indEvent.title}}</h2>
-    <p>Type: {{indEvent.categories[0].title}}</p>
-    <p>Date: {{indEvent.geometries[0].date.slice(0, 10)}}</p>
+    <h1>Natural Event: {{indEvent.title}}</h1>
+    <h2>Type: {{indEvent.categories[0].title}}</h2>
+    <h3>Date: {{indEvent.geometries[0].date.slice(0, 10)}}</h3>
   <!-- <p><iframe :src="indEvent.sources[0].url" width="300px" height="100px"></iframe></p> -->
   </div>
 </template>
