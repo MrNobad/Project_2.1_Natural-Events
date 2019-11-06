@@ -5,8 +5,8 @@
     <h2>Event</h2>
     <ind-event-detail :indEvent="selectedEvent"></ind-event-detail>
     <map-view :eventsData="eventsDataFiltered" :mapid="mapid"></map-view>
-    <!-- <event-type-description :eventTypeDescription="eventTypeDescription"></event-type-description> -->
-    <button type="button" v-for="(eventType, index) in eventTypes" name="eventType" @click="filteredEvents(eventType)">{{eventType}}</button>
+    <event-type-description :eventTypeDescription="eventTypeDescription"></event-type-description>
+    <button type="button" v-for="(eventType, index) in eventTypes" name="eventType" @click="selectedEventType(eventType)">{{eventType}}</button>
     <button type="button" name="View All" @click="filteredEvents('')">Reset Filters</button>
     <event-list :eventsData="eventsDataFiltered"></event-list>
     <!-- <h3>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"     title="Flaticon">www.flaticon.com</a></h3> -->
@@ -18,7 +18,7 @@ import {eventBus} from './main.js'
 import EventDetail from './components/EventDetail.vue';
 import Map from './components/Map.vue';
 import EventList from './components/EventList.vue';
-// import EventTypeDescription from './components/EventTypeDescription'
+import EventTypeDescription from './components/EventTypeDescription'
 
 
 export default {
@@ -32,28 +32,27 @@ export default {
       eventsData: [],
       selectedEvent: null,
       eventsDataFiltered: [],
-      eventTypeDescription: ""
     }
   },
+  props: ['eventTypeDescription'],
+
   components: {
     "map-view": Map,
     "event-list": EventList,
     "ind-event-detail": EventDetail,
-    // "event-type-description": eventTypeDescription
-    // "filtered-events": FilteredEvents
+    "event-type-description": EventTypeDescription
 
   },
 
   methods: {
-    filteredEvents: function(value){
-      if (!value) {
+    selectedEventType: function(eventType){
+      if (!eventType) {
         this.eventsDataFiltered = this.eventsData
       }else{
       this.eventsDataFiltered = this.eventsData.filter((event) => {
-        return event.categories[0].title === value;
+        return event.categories[0].title === eventType;
       })}
-
-
+      eventBus.$emit("event-type-selected", eventType)
     }
   },
 
@@ -65,6 +64,7 @@ export default {
       this.eventsData = res.events
       this.eventsDataFiltered = res.events})
     eventBus.$on('event-selected', (event) => this.selectedEvent = event)
+    eventBus.$on('event-type-description', (event) => this.eventTypeDescription = event)
 
   },
 

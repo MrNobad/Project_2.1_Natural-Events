@@ -1,6 +1,7 @@
 <template lang="html">
-  <div v-if="handleClick">
-    <p>{{eventTypeDescription.description}}</p>
+  <div v-if="selectedEventTypeDescription">
+    <h3>{{selectedEventTypeDescription.title}}</h3>
+    <p>{{selectedEventTypeDescription.info}}</p>
   </div>
 </template>
 
@@ -8,18 +9,38 @@
 import {eventBus} from '../main.js'
 
 export default {
-name: "event-type-description",
-props: ["eventTypeDescription"],
-methods: {
-  eventBus.$emit('event-type-description', this.eventTypeDescription)
-},
+  name: "event-types-description",
+
 
   data(){
     return {
-      "Severe Storm": "Not nice weather",
-      "Wildfires": "It's getting hot"
-    }
+      selectedEventTypeDescription: {},
+      eventTypesDescription: [{
+        "title": "Severe Storms",
+        "info": "Not nice weather",
+        "url": "https.//something"
+      },
+      {"title": "Wildfires",
+      "info": "It's getting hot",
+      "url": "https.//something"}
+    ]}
+  },
+props: ['eventsData'],
+mounted(){
+  eventBus.$on("event-type-selected", (eventType)=>{
+    this.setEventDescription(eventType)
+  })
+},
+
+  methods: {
+    setEventDescription(eventType){
+      if (!eventType) { ""
+      }else{
+      this.selectedEventTypeDescription = this.eventTypesDescription.find((eventDescription) => {
+        return eventDescription.title === eventType;
+      })}
   }
+}
 }
 </script>
 
