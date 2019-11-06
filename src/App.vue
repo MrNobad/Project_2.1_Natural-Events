@@ -5,17 +5,11 @@
     <h2>Event</h2>
     <ind-event-detail :indEvent="selectedEvent"></ind-event-detail>
     <map-view :eventsData="eventsDataFiltered" :mapid="mapid"></map-view>
-    <event-type-description :eventTypeDescription="eventTypeDescription"></event-type-description>
+    <!-- <event-type-description :eventTypeDescription="eventTypeDescription"></event-type-description> -->
     <button type="button" v-for="(eventType, index) in eventTypes" name="eventType" @click="filteredEvents(eventType)">{{eventType}}</button>
-
-    <!-- <button type="button" name="Severe Storms" @click="filteredEvents('Severe Storms')">Severe Storms</button>
-    <button type="button" name="Icebergs" @click="filteredEvents('Sea and Lake Ice')">Icebergs</button>
-    <button type="button" name="Volcanoes" @click="filteredEvents('Volcanoes')">Volcanoes</button>
-    <button type="button" name="Wildfires" @click="filteredEvents('Wildfires')">Wildfires</button> -->
     <button type="button" name="View All" @click="filteredEvents('')">Reset Filters</button>
-
     <event-list :eventsData="eventsDataFiltered"></event-list>
-    <h3>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"     title="Flaticon">www.flaticon.com</a></h3>
+    <!-- <h3>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"     title="Flaticon">www.flaticon.com</a></h3> -->
   </div>
 </template>
 

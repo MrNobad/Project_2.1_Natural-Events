@@ -1,6 +1,6 @@
 <template lang="html">
   <div id="mapid">
-    <l-map style="height: 80%; width: 100%" :zoom="zoom" :center="center">
+    <l-map style="height: 80%; width: 100%" :zoom="zoom" :center="center" ref="map">
       <l-tile-layer :url="url">
       </l-tile-layer>
       <l-marker
@@ -45,12 +45,23 @@ export default {
   },
 
   mounted() {
-//add $on here, listen to event-selected. changing zoom level here.
+    eventBus.$on('event-selected', (event) => {
+      this.zoomEvent([event.geometries[0].coordinates[0], event.geometries[0].coordinates[1]])
+    })
   },
 
   methods: {
     handleClick(event){
       eventBus.$emit('event-selected', event)
+    },
+
+    zoomEvent(coordinates){
+      if (!coordinates) {
+        this.center = "center"
+      }else{
+        this.$refs.map.mapObject.flyTo([coordinates[1], coordinates[0]], 5);
+
+      }
     }
   }
 }
