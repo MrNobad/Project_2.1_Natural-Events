@@ -6,10 +6,12 @@
     <ind-event-detail :indEvent="selectedEvent"></ind-event-detail>
     <map-view :eventsData="eventsDataFiltered" :mapid="mapid"></map-view>
     <event-type-description :eventTypeDescription="eventTypeDescription"></event-type-description>
-        <button type="button" name="Severe Storms" @click="filteredEvents('Severe Storms')">Severe Storms</button>
+    <button type="button" v-for="(eventType, index) in eventTypes" name="eventType" @click="filteredEvents(eventType)">{{eventType}}</button>
+
+    <!-- <button type="button" name="Severe Storms" @click="filteredEvents('Severe Storms')">Severe Storms</button>
     <button type="button" name="Icebergs" @click="filteredEvents('Sea and Lake Ice')">Icebergs</button>
     <button type="button" name="Volcanoes" @click="filteredEvents('Volcanoes')">Volcanoes</button>
-    <button type="button" name="Wildfires" @click="filteredEvents('Wildfires')">Wildfires</button>
+    <button type="button" name="Wildfires" @click="filteredEvents('Wildfires')">Wildfires</button> -->
     <button type="button" name="View All" @click="filteredEvents('')">Reset Filters</button>
 
     <event-list :eventsData="eventsDataFiltered"></event-list>
@@ -22,7 +24,7 @@ import {eventBus} from './main.js'
 import EventDetail from './components/EventDetail.vue';
 import Map from './components/Map.vue';
 import EventList from './components/EventList.vue';
-import EventTypeDescription from './components/EventTypeDescription'
+// import EventTypeDescription from './components/EventTypeDescription'
 
 
 export default {
@@ -32,6 +34,7 @@ export default {
   data() {
     return {
       mapid: [],
+      eventTypes: ['Severe Storms', 'Sea and Lake Ice', 'Volcanoes', 'Wildfires'],
       eventsData: [],
       selectedEvent: null,
       eventsDataFiltered: [],
@@ -42,7 +45,7 @@ export default {
     "map-view": Map,
     "event-list": EventList,
     "ind-event-detail": EventDetail,
-    "event-type-description": eventTypeDescription
+    // "event-type-description": eventTypeDescription
     // "filtered-events": FilteredEvents
 
   },
