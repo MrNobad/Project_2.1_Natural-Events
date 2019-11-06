@@ -1,6 +1,6 @@
 <template lang="html">
   <div id="mapid">
-    <l-map style="height: 130%; width: 100%" :zoom="zoom" :center="center" ref="map">
+    <l-map style="height: 100%; width: 90%" :zoom="zoom" :center="center" ref="map">
       <l-tile-layer :url="url">
       </l-tile-layer>
       <l-marker
@@ -70,6 +70,9 @@ export default {
 <style lang="css" scoped>
 #mapid {
   height: 500px;
+  justify-content: space-around;
+  padding-left: 150px;
 }
+
 
 </style>
