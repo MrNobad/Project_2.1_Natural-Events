@@ -1,9 +1,8 @@
 <template lang="html">
-  <div v-if="indEvent" id="indEventDetail">
+  <div class="event-item" v-if="indEvent" id="indEventDetail">
     <h1>Natural Event: {{indEvent.title}}</h1>
     <h2>Type: {{indEvent.categories[0].title}}</h2>
     <h3>Date: {{indEvent.geometries[0].date.slice(0, 10)}}</h3>
-  <!-- <p><iframe :src="indEvent.sources[0].url" width="300px" height="100px"></iframe></p> -->
   </div>
 </template>
 
@@ -15,4 +14,12 @@ export default {
 </script>
 
 <style lang="css" scoped>
+
+.event-item {
+  background-color: #6495ed;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 10px;
+}
 </style>

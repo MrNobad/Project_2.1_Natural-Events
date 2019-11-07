@@ -5,8 +5,8 @@
       <p class="p" ><strong>The Earth Observatory Natural Event Tracker (EONET)</strong></p>
       <h3>Powered by NASA and Ross, Laurie & Stevie</h3>
     </div>
-    <div>
-      <ind-event-detail :indEvent="selectedEvent"></ind-event-detail>
+    <div class="event-wrapper">
+      <ind-event-detail class:="event-item" :indEvent="selectedEvent" id="event-item" ></ind-event-detail>
     </div>
     <div class="header">
       <map-view class="map-centre" :eventsData="eventsDataFiltered" :mapid="mapid"></map-view>
@@ -14,6 +14,7 @@
 
       <button id="button" type="button" v-for="(eventType, index) in eventTypes" name="eventType" @click="selectedEventType(eventType)"><strong>{{eventType}}</strong></button>
       <button id="button" type="button" name="View All" @click="selectedEventType('')"><strong>Reset Filters</strong></button>
+
 
       <event-type-description :eventTypeDescription="eventTypeDescription"></event-type-description>
     </div>
@@ -34,7 +35,7 @@ import EventTypeDescription from './components/EventTypeDescription'
 
 export default {
   name: 'app',
-  // props: ['indEvent'],
+
 
   data() {
     return {
@@ -82,15 +83,13 @@ export default {
     }
     </script>
 
-    <style>
+    <style lang="css">
       #app {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         text-align: left;
         color: #000000;
         margin-top: 10px;
         padding: 25px;
-
-
       }
 
       .header {
@@ -120,5 +119,9 @@ eventTypeDescription{
   flex-box: wrap;
 }
 
+.event-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
 
     </style>
