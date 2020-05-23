@@ -13,8 +13,9 @@ export default {
   props: ['indEvent'],
   methods: {
     handleClick(){
-      eventBus.$emit('event-selected', this.event)
+      eventBus.$emit('event-selected', this.indEvent)
     }
+
   }
 
 }

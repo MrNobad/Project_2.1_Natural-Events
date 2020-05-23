@@ -1,6 +1,6 @@
 <template lang="html">
   <div id="mapid">
-    <l-map style="height: 80%; width: 100%" :zoom="zoom" :center="center">
+    <l-map style="height: 100%; width: 90%" :zoom="zoom" :center="center" ref="map">
       <l-tile-layer :url="url">
       </l-tile-layer>
       <l-marker
@@ -9,9 +9,10 @@
       :latLng="{
         lat: event.geometries[0].coordinates[1],
         lng: event.geometries[0].coordinates[0]
-      }">
-      <l-popup :content="event.title"> </l-popup>
-    </l-marker>
+        }"
+        v-on:click="handleClick(event)">
+        <l-popup :content="event.title"> </l-popup>
+      </l-marker>
     </l-map>
   </div>
 </template>
@@ -37,27 +38,41 @@ export default {
   data () {
     return {
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-      zoom: 3,
+      zoom: 2.5,
       center: [47.413220, -1.219482],
       markerLatLng: [47.313220, -1.319482]
     };
   },
 
   mounted() {
-
+    eventBus.$on('event-selected', (event) => {
+      this.zoomEvent([event.geometries[0].coordinates[0], event.geometries[0].coordinates[1]])
+    })
   },
 
-methods: {
-  // openPopup: (index) => {
-  //   console.log(index);
-  // }
-}
+  methods: {
+    handleClick(event){
+      eventBus.$emit('event-selected', event)
+    },
+
+    zoomEvent(coordinates){
+      if (!coordinates) {
+        this.center = "center"
+      }else{
+        this.$refs.map.mapObject.flyTo([coordinates[1], coordinates[0]], 9);
+
+      }
+    }
+  }
 }
 </script>
 
 <style lang="css" scoped>
 #mapid {
   height: 500px;
+  justify-content: space-around;
+  padding-left: 150px;
 }
+
 
 </style>

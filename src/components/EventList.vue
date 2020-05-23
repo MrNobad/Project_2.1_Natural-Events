@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import ListItem from './List.vue'
+import ListItem from './ListItem.vue'
 
 export default {
   name: 'events-list',
