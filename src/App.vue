@@ -3,7 +3,7 @@
     <div class="header">
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/200px-NASA_logo.svg.png" alt="">
       <p class="p" ><strong>The Earth Observatory Natural Event Tracker (EONET)</strong></p>
-      <h3>Powered by NASA and Ross, Laurie & Stevie</h3>
+      <h3>Powered by NASA and Stephen</h3>
     </div>
     <div class="event-wrapper">
       <ind-event-detail class:="event-item" :indEvent="selectedEvent" id="event-item" ></ind-event-detail>
