@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "core-js": "^3.3.2",
+    "heroku": "^7.41.1",
     "leaflet": "^1.5.1",
     "vue": "^2.6.10",
     "vue2-leaflet": "^2.2.1"
